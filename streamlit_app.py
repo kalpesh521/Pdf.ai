@@ -1,7 +1,7 @@
 import binascii
-import streamlit as st
+import streamlit_app as st
 import requests
-from streamlit import session_state as ss
+from streamlit_app import session_state as ss
 from streamlit_pdf_viewer import pdf_viewer
 
 
