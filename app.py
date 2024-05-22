@@ -1,4 +1,3 @@
-# app.py
 
 from fastapi import FastAPI, UploadFile, File
 import fitz  
@@ -8,9 +7,17 @@ from langchain_community.embeddings.openai import OpenAIEmbeddings
 from langchain.chains.question_answering import load_qa_chain
 from langchain_community.llms import OpenAI
 from dotenv import load_dotenv
-from model import QueryRequest  # Import the QueryRequest class from model.py
-
+from model import QueryRequest   
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 load_dotenv()
 
