@@ -33,7 +33,8 @@ if uploaded_file:
                     try: 
                         if st.session_state.pdf_ref:
                             files = {'file': st.session_state.pdf_ref}
-                            upload_response = requests.post("http://127.0.0.1:8000/uploadfile/", files=files)
+                            # upload_response = requests.post("http://127.0.0.1:8000/uploadfile/", files=files)
+                            upload_response = requests.post("https://pdf-ai-l6cm.onrender.com/uploadfile/", files=files)
                     
                         if upload_response.status_code == 200:
                             data = upload_response.json()
@@ -46,7 +47,8 @@ if uploaded_file:
                             'query': user_query
                         }
                         
-                        response = requests.post("http://127.0.0.1:8000/query/", json=payload)
+                        response = requests.post("https://pdf-ai-l6cm.onrender.com/query/", json=payload)
+                        # response = requests.post("http://127.0.0.1:8000/query/", json=payload)
                         
                         if response.status_code == 200:
                             answer = response.json().get('answer', 'No answer found.')
