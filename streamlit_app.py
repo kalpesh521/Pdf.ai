@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from streamlit_pdf_viewer import pdf_viewer
 
-st.title("Query PDF Using AI")
+st.title("ChatWithPDF")
 st.write("Upload a PDF file")
 
 if 'pdf_ref' not in st.session_state:
@@ -26,14 +26,12 @@ if uploaded_file:
     st.write("You can now query the PDF content")
     user_query = st.text_input("Enter your query")
 
- 
               
     if st.button("GET ANSWER"):
         with st.spinner('Processing...'):
                     try: 
                         if st.session_state.pdf_ref:
                             files = {'file': st.session_state.pdf_ref}
-                            # upload_response = requests.post("http://127.0.0.1:8000/uploadfile/", files=files)
                             upload_response = requests.post("https://pdf-ai-l6cm.onrender.com/uploadfile/", files=files)
                     
                         if upload_response.status_code == 200:
@@ -48,7 +46,6 @@ if uploaded_file:
                         }
                         
                         response = requests.post("https://pdf-ai-l6cm.onrender.com/query/", json=payload)
-                        # response = requests.post("http://127.0.0.1:8000/query/", json=payload)
                         
                         if response.status_code == 200:
                             answer = response.json().get('answer', 'No answer found.')
