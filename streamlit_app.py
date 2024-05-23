@@ -3,15 +3,14 @@ import requests
 from streamlit_pdf_viewer import pdf_viewer
 
 st.title("ChatWithPDF")
-st.write("Upload a PDF file")
-
+ 
 if 'pdf_ref' not in st.session_state:
     st.session_state.pdf_ref = None
 
 if 'pdf_content' not in st.session_state:
     st.session_state.pdf_content = None
 
-uploaded_file = st.file_uploader("Choose a PDF file", type="pdf", key='pdf')
+uploaded_file = st.file_uploader("Upload a PDF file", type="pdf", key='pdf')
 
 if uploaded_file:
     st.session_state.pdf_ref = uploaded_file  
@@ -23,8 +22,7 @@ if st.session_state.pdf_ref:
             pdf_viewer(input=binary_data, width=700)
              
 if uploaded_file:
-    st.write("You can now query the PDF content")
-    user_query = st.text_input("Enter your query")
+    user_query = st.text_input("Enter Query")
 
               
     if st.button("GET ANSWER"):
